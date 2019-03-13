@@ -15,11 +15,11 @@
 
     <form method="POST" action="vlozit.php">
         <div class="form-group">
-            <label for="loginInput">Jméno:</label>
+            <label for="jmeno">Jméno:</label>
             <input type="text" class="form-control" name="jmeno">
         </div>
         <div class="form-group">
-            <label for="validationTextarea">Vzkaz</label>
+            <label for="vzkaz">Vzkaz</label>
             <textarea class="form-control is-invalid" id="validationTextarea" required></textarea>
 
         </div>
@@ -28,22 +28,27 @@
     <br>
 
     <?php
+    if (file_exists('prispevky.txt')) {
 
-       if (file_exists('prispevky.txt')) {
-        $handle = fopen('prispevky.txt', 'r');
-        if ($handle === false) {echo 'Soubor se nepodařilo otevřít!';
-        } else {
-        if ($handle){$array = explode ("\n",fread($handle,4096 ));
-            $seradit = array_reverse($array);
-            foreach ($seradit as $komentar){echo $komentar;}
-        }
-        fclose($handle);
-        } else {
-            echo "Žádné příspěvky.";
-        }
-       }
+    $handle = fopen('prispevky.txt', 'r');
+    if ($handle === false) {echo 'Soubor se nepodařilo otevřít!';}
+    else
+    { if($handle){$array = explode ("\n",fread($handle,4096 ));}
+    $serazene = array_reverse($array);
+    foreach ($serazene as $komentar)
+        {echo $komentar;}
+    }
+    if (!file_exists('prispevky.txt')) {
+    echo "<hr><p>Žádné příspěvky!</p>";
+    } else {
+    $handle = fopen('prispevky.txt', 'r');
+    $contents = fread($handle, 10000);
+    echo $serazene($komentar, "<hr>");
+    fclose($handle);
+    }
 
-     ?>
+    }
+    ?>
 
 </div>
 </body>

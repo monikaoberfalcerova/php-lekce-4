@@ -13,31 +13,29 @@
 <br>
 <div class="container">
 
-  <?php
+    <?php
 $handle = fopen('prispevky.txt', 'a');
-if ($handle === false)
-{
-    echo "Soubor se nepodařilo otevřít.";
-
-
-} else {
   if (isset($_POST['jmeno']) && isset($_POST['vzkaz']))
   {
-    $jmeno = $_POST['jmeno'];
-    $vzkaz = $_POST['vzkaz'];
-    $komentar = "<b>$jmeno </b>: <br> $vzkaz <br><hr>"."\n";
+  $jmeno = $_POST['jmeno'];
+  $vzkaz = $_POST['vzkaz'];
+  $komentar = "<b>$jmeno<b>: <br> $vzkaz <br><hr>"."\n";
 
   if (fwrite($handle, $komentar)) {
-    echo 'Vzkaz byl vložen.';
-    echo '<a href="navstevni-kniha.php">Zpět na návštěvní knihu.</a>';
-} else {
+      echo '<p>Vzkaz byl vložen.<p>';
+      echo '<p><a href="navstevni-kniha.php">Zpět na návštěvní knihu.</a><p>';
+
+  } else {
       echo "<p>Chyba při ukládání příspěvku!</p>";
+      echo '<p><a href="navstevni-kniha.php">Zpět na návštěvní knihu.</a><p>';
   }
-  echo '<a href="navstevni-kniha.php">Zpět na návštěvní knihu.</a>';
+    if ($handle === false) {
+    echo "Soubor se nepodařilo otevřít.";
+
+        fclose($handle);
+    }
   }
-  fclose($handle);
-}
-?>
+  ?>
 
 </div>
 </body>
