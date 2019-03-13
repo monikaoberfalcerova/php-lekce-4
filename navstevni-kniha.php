@@ -28,26 +28,20 @@
     <br>
 
     <?php
+
     if (file_exists('prispevky.txt')) {
-
-    $handle = fopen('prispevky.txt', 'r');
-    if ($handle === false) {echo 'Soubor se nepodařilo otevřít!';}
-    else
-    { if($handle){$array = explode ("\n",fread($handle,4096 ));}
-    $serazene = array_reverse($array);
-    foreach ($serazene as $komentar)
-        {echo $komentar;}
-    }
-    if (!file_exists('prispevky.txt')) {
-    echo "<hr><p>Žádné příspěvky!</p>";
-    } else {
-    $handle = fopen('prispevky.txt', 'r');
-    $contents = fread($handle, 10000);
-    echo $serazene($komentar, "<hr>");
-    fclose($handle);
-    }
-
-    }
+        $handle = fopen('prispevky.txt', 'r');
+        if ($handle === false) {
+            echo 'Soubor se nepodařilo otevřít!';
+        } else {
+            if($handle){$array = explode ("\n",fread($handle,4096 ));}
+            $SeradPrispevky = array_reverse($array);
+            foreach ($SeradPrispevky as $prispevek){echo $prispevek;}
+        }
+        fclose($handle);
+        } else {
+    echo '<hr><p>Žádné příspěvky</p>';
+      }
     ?>
 
 </div>
