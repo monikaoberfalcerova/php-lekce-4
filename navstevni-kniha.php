@@ -16,7 +16,7 @@
     <form method="POST" action="vlozit.php">
         <div class="form-group">
             <label for="loginInput">Jméno:</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" name="jmeno">
         </div>
         <div class="form-group">
             <label for="validationTextarea">Vzkaz</label>
@@ -29,19 +29,19 @@
 
     <?php
 
-    if (file_exists('prispevky.txt')) {
+       if (file_exists('prispevky.txt')) {
         $handle = fopen('prispevky.txt', 'r');
         if ($handle === false) {echo 'Soubor se nepodařilo otevřít!';
-        } elseif
-        ($handle){$array = explode ("\n",fread($handle,4096 ));
+        } else {
+        if ($handle){$array = explode ("\n",fread($handle,4096 ));
             $seradit = array_reverse($array);
             foreach ($seradit as $komentar){echo $komentar;}
         }
         fclose($handle);
-    }
-    else {echo "Žádné příspěvky.";}
-
-
+        } else {
+            echo "Žádné příspěvky.";
+        }
+       }
 
      ?>
 

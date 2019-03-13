@@ -15,17 +15,28 @@
 
   <?php
 $handle = fopen('prispevky.txt', 'a');
-if (!$handle) {
-echo "Chyba při otevírání souboru!";
+if ($handle === false)
+{
+    echo "Soubor se nepodařilo otevřít.";
+
 
 } else {
+  if (isset($_POST['jmeno']) && isset($_POST['vzkaz']))
+  {
     $jmeno = $_POST['jmeno'];
     $vzkaz = $_POST['vzkaz'];
-    $komentar = '<b>' . $jmeno . '</b><br>' . $vzkaz . "<br><hr>\n";
+    $komentar = "<b>$jmeno </b>: <br> $vzkaz <br><hr>"."\n";
+
+  if (fwrite($handle, $komentar)) {
     echo 'Vzkaz byl vložen.';
     echo '<a href="navstevni-kniha.php">Zpět na návštěvní knihu.</a>';
-}
+} else {
+      echo "<p>Chyba při ukládání příspěvku!</p>";
+  }
+  echo '<a href="navstevni-kniha.php">Zpět na návštěvní knihu.</a>';
+  }
   fclose($handle);
+}
 ?>
 
 </div>
